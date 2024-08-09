@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark/White Mode Toggle</title>
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .light-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .toggle-button {
+            padding: 10px 20px;
+            margin: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .toggle-button.dark {
+            background-color: #ffffff;
+            color: #121212;
+        }
+
+        .toggle-button.light {
+            background-color: #121212;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <button id="toggleButton" class="toggle-button dark">Switch to Dark Mode</button>
+
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.replace('light-mode', 'dark-mode');
+                toggleButton.textContent = 'Switch to Light Mode';
+                toggleButton.classList.replace('dark', 'light');
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+                toggleButton.textContent = 'Switch to Dark Mode';
+                toggleButton.classList.replace('light', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
