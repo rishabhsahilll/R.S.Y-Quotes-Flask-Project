@@ -5,12 +5,14 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="R.S.Y Quotes Explore an infinite collection of daily quotes and inspiration by developer Rishabh Sahil. Stay motivated every day with endless insights and uplifting thoughts.">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <title>Home | R.S.Y | Quotes</title>
+  <meta name="google-site-verification" content="N71DoZeV_Zdrcsbj0Ogx8qF-I1IUCJFkEQQXc5zGSqM" />
   <link rel="shortcut icon" href="https://www.freeiconspng.com/uploads/quotes-png-3.png" type="image/x-icon">
   <style>
     body {
@@ -19,7 +21,7 @@
       background-color: #212529;
       overflow-x: hidden;
     }
-    
+
     .card {
       margin: 15px;
       border: 1px solid #6d6c6c;
@@ -105,6 +107,37 @@
         0 0 20px rgba(255, 255, 255, 0.5),
         0 0 25px rgba(255, 255, 255, 0.5);
     }
+
+    /* Speak */
+    .speak-button {
+      background-color: transparent;
+      color: #333;
+      /* Dark color for the icon */
+      border: none;
+      border-radius: 50%;
+      padding: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      /* Smooth transition for background color and scale */
+    }
+
+    .speak-button:hover {
+      background-color: #333;
+      /* Darker background on hover */
+      color: #fff;
+      /* White color for the icon on hover */
+      transform: scale(1.1);
+      /* Slightly increase the size on hover */
+    }
+
+    .speak-button svg {
+      fill: currentColor;
+      /* Use the current text color for the icon */
+    }
   </style>
 </head>
 
@@ -112,9 +145,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-bottom: solid 2px #6d6c6c;">
     <div class="container-fluid">
       {% if random_data.a == 'Bug 🐛' %}
-        <a class="navbar-brand" href="/quote">Refresh</a>
+      <a class="navbar-brand" href="/quote">Refresh</a>
       {% else %}
-        <a class="navbar-brand" href="/quote">Home</a>
+      <a class="navbar-brand" href="/quote">Home</a>
       {% endif %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -171,7 +204,8 @@
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" id="searchInput" placeholder="Search" aria-label="Search" style="display: none;">
+          <input class="form-control me-2" type="search" id="searchInput" placeholder="Search" aria-label="Search"
+            style="display: none;">
         </form>
       </div>
     </div>
@@ -181,11 +215,13 @@
     <div class="overlay">
       <div class="text-container">
         {% if random_data.a == 'Bug 🐛' %}
-          <h1>{{ random_data.q }}</h1>
-          <p><a href="\quote\" >{{ random_data.a }}</a></p>
+        <h1>{{ random_data.q }}</h1>
+        <p><a href="\quote\">{{ random_data.a }}</a></p>
         {% else %}
-          <h1>{{ random_data.q }}</h1>
-          <p>Author: <a href="authors/{{ random_data.a | replace('unknown', 'Rishabh Sahil') | replace('Unknown', 'Rishabh Sahil') | replace(' ', '-') | replace('.', '_') | lower }}\{{trans_lang.translang}}" >{{ random_data.a | replace('unknown', 'Rishabh Sahil') | replace('Unknown', 'Rishabh Sahil') }}</a></p>
+        <h1>{{ random_data.q }}</h1>
+        <p>Author: <a
+            href="authors/{{ random_data.a | replace('unknown', 'Rishabh Sahil') | replace('Unknown', 'Rishabh Sahil') | replace(' ', '-') | replace('.', '_') | lower }}\{{trans_lang.translang}}">{{
+            random_data.a | replace('unknown', 'Rishabh Sahil') | replace('Unknown', 'Rishabh Sahil') }}</a></p>
         {% endif %}
       </div>
     </div>
@@ -257,40 +293,63 @@
             const encodedAuthor = encodeURIComponent(quote.a);
             const waLink = `https://wa.me/?text=${encodeURIComponent(`https://sahil87096.pythonanywhere.com/quote/${encodedAuthor}/${encodedQuote}/{{ trans_lang.translang }}`)}`;
             const cardHtml = `
-              <div class="col-md-4">
-                <div class="card">
-                  <div class="card-header">
-                    {% if trans_lang.translang == 'en' %}
-                      <a href="https://translate.google.com/?sl=auto&tl=hi&text=${translatedQuote}" style="color: rgb(0, 0, 0); text-decoration: none;">Quote</a>
-                    {% else %}
-                      <a href="https://translate.google.com/?sl=auto&tl=en&text=${translatedQuote}" style="color: rgb(0, 0, 0); text-decoration: none;">Quote</a>
-                    {% endif %}
-                  </div>
-                  <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                      <p>&#8246;${translatedQuote}&#8246;</p>
-                      <footer class="blockquote-footer">
-                        <cite title="Source Title">
-                          <a href="${link}" style="color: red; text-decoration: none;">
-                            <b>${quote.a}</b>
-                          </a>
-                        </cite>
-                        <a href="${waLink}"  class="copy-icon">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-                              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                            </svg>
-                      </a>
-                      </footer>
-                    </blockquote>
-                  </div>
-                </div>
-              </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        {% if trans_lang.translang == 'en' %}
+          <a href="https://translate.google.com/?sl=auto&tl=hi&text=${translatedQuote}" style="color: rgb(0, 0, 0); text-decoration: none;">Quote</a>
+        {% else %}
+          <a href="https://translate.google.com/?sl=auto&tl=en&text=${translatedQuote}" style="color: rgb(0, 0, 0); text-decoration: none;">Quote</a>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>&#8246;${translatedQuote}&#8246;</p>
+          <footer class="blockquote-footer">
+            <cite title="Source Title">
+              <a href="${link}" style="color: red; text-decoration: none;">
+                <b>${quote.a}</b>
+              </a>
+            </cite>
+            <a href="${waLink}" class="copy-icon" title="Share on WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+              </svg>
+            </a>
+            <button class="btn btn-dark ms-2 speak-button" data-quote="${quote.a}, ${translatedQuote}" title="Speak">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16">
+  <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z"/>
+  <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z"/>
+  <path d="M10.025 8a4.5 4.5 0 0 1-1.318 3.182L8 10.475A3.5 3.5 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.5 4.5 0 0 1 10.025 8M7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11"/>
+</svg>
+            </button>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
             `;
             container.innerHTML += cardHtml;
           }
         });
       });
     }
+
+    // Function to speak the quote
+    function speakQuote(text,  lang = 'hi-IN') {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Event listener for the "Speak" button
+    document.addEventListener('click', function (event) {
+      if (event.target && event.target.classList.contains('speak-button')) {
+        const quote = event.target.getAttribute('data-quote');
+        const lang = 'hi-IN'; // Current language
+        speakQuote(quote, lang);
+      }
+    });
 
     // Event listener for input change
     document.getElementById('searchInput').addEventListener('input', function () {
